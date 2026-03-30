@@ -3,168 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curriculum | CloudLearning</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Curriculum | Elite Azure Architecture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-dark: #050505; --surface: #111; --primary: #0078D4; --text-main: #fff; --text-muted: #888; --border: #222; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-main); padding: 0 5% 100px; }
-        
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 2rem 0; border-bottom: 1px solid var(--border); max-width: 900px; margin: 0 auto 60px; }
-        .logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem; font-weight: 900; color: white; text-decoration: none; }
+        :root { --bg-base: #050505; --surface: #111111; --primary: #0078D4; --text-main: #ffffff; --text-muted: #888888; --border: #222222; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-base); color: var(--text-main); overflow-x: hidden; }
+
+        /* Navigation */
+        nav { position: fixed; top: 0; width: 100%; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+        .logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem; font-weight: 900; color: white; text-decoration: none; letter-spacing: -1px; }
         .logo span { color: var(--primary); }
-        .btn { padding: 10px 20px; font-weight: 600; border-radius: 6px; text-decoration: none; border: 1px solid var(--border); color: white; transition: 0.3s; }
-        .btn:hover { background: white; color: black; }
+        .btn-outline { padding: 10px 24px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; text-decoration: none; border: 1px solid var(--border); color: white; transition: 0.3s; background: rgba(255,255,255,0.05); }
+        .btn-outline:hover { border-color: var(--primary); background: rgba(0, 120, 212, 0.1); }
 
-        .container { max-width: 900px; margin: 0 auto; }
-        .header { margin-bottom: 40px; }
-        .tag { display: inline-block; background: rgba(0, 120, 212, 0.1); color: var(--primary); padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; border: 1px solid rgba(0, 120, 212, 0.3); }
-        h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 16px; }
-        .meta { display: flex; gap: 20px; color: var(--text-muted); font-size: 0.95rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 15px 0; margin-bottom: 40px; }
+        /* Hero Header */
+        .syllabus-hero { padding: 160px 5% 80px; text-align: center; background: radial-gradient(circle at top, rgba(0, 120, 212, 0.15) 0%, transparent 60%); border-bottom: 1px solid var(--border); }
+        .pill { display: inline-block; border: 1px solid rgba(0, 120, 212, 0.3); background: rgba(0, 120, 212, 0.1); padding: 8px 20px; border-radius: 100px; font-size: 0.85rem; font-weight: 700; color: #60a5fa; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        .syllabus-hero h1 { font-family: 'Plus Jakarta Sans'; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 20px; }
+        .syllabus-hero p { color: #a1a1aa; font-size: 1.15rem; max-width: 700px; margin: 0 auto 30px; line-height: 1.6; }
+        
+        .course-meta { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px; }
+        .meta-item { background: var(--surface); border: 1px solid var(--border); padding: 15px 25px; border-radius: 12px; }
+        .meta-value { font-family: 'Plus Jakarta Sans'; font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+        .meta-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
 
-        /* Interactive Accordion Styles */
-        .accordion { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--surface); }
-        .module { border-bottom: 1px solid var(--border); }
-        .module:last-child { border-bottom: none; }
+        /* The Interactive Timeline */
+        .timeline-container { max-width: 1000px; margin: 80px auto; padding: 0 5%; position: relative; }
         
-        .module-header { padding: 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: var(--surface); transition: 0.3s; }
-        .module-header:hover { background: #1a1a1a; }
-        .module-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 15px; }
-        .module-num { color: var(--primary); font-family: 'Plus Jakarta Sans'; font-weight: 900; font-size: 1.2rem; }
-        .icon { font-size: 1.5rem; transition: transform 0.3s ease; color: var(--text-muted); }
+        /* The glowing center line */
+        .timeline-container::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: linear-gradient(to bottom, var(--primary), #8b5cf6, transparent); transform: translateX(-50%); opacity: 0.3; }
+
+        .timeline-item { display: flex; justify-content: flex-end; padding-right: 50%; position: relative; margin-bottom: 60px; opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .timeline-item:nth-child(even) { justify-content: flex-start; padding-right: 0; padding-left: 50%; }
         
-        .module-content { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0, 1, 0, 1); background: var(--bg-dark); }
-        .module-content.active { max-height: 1000px; transition: max-height 0.6s ease-in-out; }
-        .content-inner { padding: 24px; color: #ccc; font-size: 0.95rem; line-height: 1.7; border-top: 1px solid var(--border); }
+        /* Animation class added by JS */
+        .timeline-item.visible { opacity: 1; transform: translateY(0); }
+
+        /* The glowing dot on the line */
+        .timeline-item::before { content: ''; position: absolute; top: 30px; right: -8px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-base); border: 3px solid var(--primary); z-index: 10; box-shadow: 0 0 15px rgba(0, 120, 212, 0.6); }
+        .timeline-item:nth-child(even)::before { right: auto; left: -8px; }
+
+        .timeline-content { background: var(--surface); border: 1px solid var(--border); padding: 30px; border-radius: 16px; width: 90%; position: relative; transition: 0.3s; }
+        .timeline-content:hover { border-color: rgba(0, 120, 212, 0.5); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); transform: translateY(-5px); }
         
-        .lab-list { margin-top: 16px; list-style: none; }
-        .lab-list li { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .lab-list li::before { content: "⚡"; font-size: 0.9rem; }
-        .tech-stack { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
-        .tech { background: #222; padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; color: #aaa; }
+        /* Connecting arrow to the line */
+        .timeline-content::after { content: ''; position: absolute; top: 32px; right: -10px; width: 20px; height: 2px; background: var(--border); }
+        .timeline-item:nth-child(even) .timeline-content::after { right: auto; left: -10px; }
+
+        .week-badge { display: inline-block; background: rgba(255,255,255,0.05); color: #ccc; font-weight: 700; font-size: 0.8rem; padding: 6px 12px; border-radius: 6px; margin-bottom: 15px; border: 1px solid var(--border); }
+        .timeline-content h3 { font-family: 'Plus Jakarta Sans'; font-size: 1.5rem; margin-bottom: 15px; color: white; }
+        .timeline-content p { color: #a1a1aa; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+
+        .lab-box { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 15px; border-left: 3px solid var(--primary); }
+        .lab-box h4 { font-size: 0.85rem; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .lab-box ul { list-style: none; }
+        .lab-box li { color: #ccc; font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: start; gap: 8px; }
+        .lab-box li::before { content: '▹'; color: var(--primary); font-weight: bold; }
+
+        .tech-stack { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+        .tech-tag { background: #222; color: #ddd; font-size: 0.75rem; padding: 4px 10px; border-radius: 4px; font-weight: 600; }
+
+        /* Sticky Bottom CTA */
+        .sticky-cta { position: fixed; bottom: 0; width: 100%; background: rgba(5, 5, 5, 0.9); backdrop-filter: blur(10px); border-top: 1px solid var(--border); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 100; transform: translateY(100%); transition: transform 0.4s ease; }
+        .sticky-cta.visible { transform: translateY(0); }
+        .cta-text { font-family: 'Plus Jakarta Sans'; font-weight: 800; font-size: 1.1rem; }
+        .btn-primary { background: white; color: black; padding: 12px 24px; border-radius: 8px; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: 0.3s; }
+        .btn-primary:hover { box-shadow: 0 0 20px rgba(255,255,255,0.3); transform: scale(1.05); }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .timeline-container::before { left: 20px; }
+            .timeline-item, .timeline-item:nth-child(even) { justify-content: flex-start; padding-right: 0; padding-left: 50px; }
+            .timeline-item::before, .timeline-item:nth-child(even):::before { left: 12px; right: auto; }
+            .timeline-content { width: 100%; }
+            .timeline-content::after, .timeline-item:nth-child(even) .timeline-content::after { left: -30px; width: 30px; }
+            .sticky-cta { flex-direction: column; gap: 15px; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <a href="index.html" class="logo">Cloud<span>Learning</span></a>
-        <a href="portal.html" class="btn">Login to Portal</a>
+        <div>
+            <a href="index.html" class="btn-outline" style="margin-right: 10px;">Back to Home</a>
+            <a href="index.html#enroll" class="btn-primary" style="padding: 10px 24px;">Enroll Now</a>
+        </div>
     </nav>
 
-    <main class="container">
-        <div class="header">
-            <div class="tag">Enterprise Certification Track</div>
-            <h1>Azure Solutions Architect Expert</h1>
-            <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 700px; line-height: 1.6;">An exhaustive 12-week intensive designed to elevate IT professionals into certified Cloud Architects capable of designing scalable, secure enterprise environments.</p>
-        </div>
+    <header class="syllabus-hero">
+        <div class="pill">Complete Roadmap</div>
+        <h1>Zero to Cloud Architect</h1>
+        <p>This isn't a theoretical crash course. This is a 12-week, hands-on masterclass designed to give you the exact skills Fortune 500 companies are hiring for.</p>
         
-        <div class="meta">
-            <span>⏱️ 120 Total Hours</span>
-            <span>🛠️ 40+ Practical Labs</span>
-            <span>🎯 Prepares for AZ-305 Exam</span>
+        <div class="course-meta">
+            <div class="meta-item">
+                <div class="meta-value">12 Weeks</div>
+                <div class="meta-label">Duration</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-value">40+</div>
+                <div class="meta-label">Live Labs</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-value">AZ-305</div>
+                <div class="meta-label">Target Exam</div>
+            </div>
         </div>
+    </header>
 
-        <div class="accordion">
-            <div class="module">
-                <div class="module-header" onclick="toggleModule(this)">
-                    <div class="module-title"><span class="module-num">01</span> Identity, Governance & Security Architecture</div>
-                    <div class="icon">+</div>
+    <main class="timeline-container">
+        
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="week-badge">Weeks 1-3 • Foundation</div>
+                <h3>Identity & Security Perimeter</h3>
+                <p>We start by securing the borders. Learn how enterprise organizations manage millions of users securely using modern authentication protocols and role-based access.</p>
+                <div class="lab-box">
+                    <h4>Hands-on Labs Included</h4>
+                    <ul>
+                        <li>Deploy and configure Microsoft Entra ID (Azure AD).</li>
+                        <li>Implement Conditional Access Policies & MFA.</li>
+                        <li>Setup Azure Key Vault for application secrets.</li>
+                    </ul>
                 </div>
-                <div class="module-content">
-                    <div class="content-inner">
-                        <p>We begin by securing the perimeter. You will learn to design complex authentication models using Microsoft Entra ID, implement Zero Trust frameworks, and enforce organizational compliance using Azure Policy.</p>
-                        <ul class="lab-list">
-                            <li>Lab: Configuring Conditional Access & MFA</li>
-                            <li>Lab: Cross-Tenant Synchronization Setup</li>
-                            <li>Lab: Implementing Azure Key Vault for Secrets Management</li>
-                        </ul>
-                        <div class="tech-stack"><span class="tech">Entra ID</span><span class="tech">RBAC</span><span class="tech">Azure Policy</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="module">
-                <div class="module-header" onclick="toggleModule(this)">
-                    <div class="module-title"><span class="module-num">02</span> Enterprise Network Topology & Hybrid Connectivity</div>
-                    <div class="icon">+</div>
-                </div>
-                <div class="module-content">
-                    <div class="content-inner">
-                        <p>Master the plumbing of the cloud. Design Hub-and-Spoke network topologies, manage global traffic, and securely connect on-premises data centers to Azure.</p>
-                        <ul class="lab-list">
-                            <li>Lab: Deploying an Azure Firewall & Routing Tables</li>
-                            <li>Lab: Establishing Site-to-Site VPNs & ExpressRoute</li>
-                            <li>Lab: Global Load Balancing with Azure Front Door</li>
-                        </ul>
-                        <div class="tech-stack"><span class="tech">VNet Peering</span><span class="tech">ExpressRoute</span><span class="tech">Traffic Manager</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="module">
-                <div class="module-header" onclick="toggleModule(this)">
-                    <div class="module-title"><span class="module-num">03</span> Compute, Containers & Serverless Infrastructure</div>
-                    <div class="icon">+</div>
-                </div>
-                <div class="module-content">
-                    <div class="content-inner">
-                        <p>Move beyond standard VMs. You will architect scalable microservices using Docker, Kubernetes, and Azure Functions to handle millions of requests.</p>
-                        <ul class="lab-list">
-                            <li>Lab: Building and Deploying to Azure Kubernetes Service (AKS)</li>
-                            <li>Lab: Event-Driven Architecture with Azure Functions</li>
-                            <li>Lab: Auto-scaling Virtual Machine Scale Sets (VMSS)</li>
-                        </ul>
-                        <div class="tech-stack"><span class="tech">Docker</span><span class="tech">AKS (Kubernetes)</span><span class="tech">Azure Functions</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="module">
-                <div class="module-header" onclick="toggleModule(this)">
-                    <div class="module-title"><span class="module-num">04</span> Infrastructure as Code (IaC) & DevOps Pipelines</div>
-                    <div class="icon">+</div>
-                </div>
-                <div class="module-content">
-                    <div class="content-inner">
-                        <p>Stop clicking through the portal. Learn to write enterprise-grade automation scripts to deploy entire environments in minutes.</p>
-                        <ul class="lab-list">
-                            <li>Lab: Writing declarative templates with ARM & Bicep</li>
-                            <li>Lab: Setting up CI/CD Pipelines in GitHub Actions</li>
-                            <li>Capstone: Automated deployment of a 3-tier application</li>
-                        </ul>
-                        <div class="tech-stack"><span class="tech">Bicep</span><span class="tech">Terraform</span><span class="tech">GitHub Actions</span></div>
-                    </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Entra ID</span>
+                    <span class="tech-tag">RBAC</span>
+                    <span class="tech-tag">Zero Trust</span>
                 </div>
             </div>
         </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="week-badge">Weeks 4-6 • Infrastructure</div>
+                <h3>Global Network Topology</h3>
+                <p>Master the underlying plumbing of the cloud. You will design Hub-and-Spoke networks, implement global load balancing, and connect on-premise data centers to Azure.</p>
+                <div class="lab-box">
+                    <h4>Hands-on Labs Included</h4>
+                    <ul>
+                        <li>Deploy Hub-and-Spoke VNet peering architecture.</li>
+                        <li>Configure Site-to-Site VPNs & ExpressRoute mockups.</li>
+                        <li>Global traffic routing with Azure Front Door.</li>
+                    </ul>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">VNet Peering</span>
+                    <span class="tech-tag">Azure Firewall</span>
+                    <span class="tech-tag">Traffic Manager</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="week-badge">Weeks 7-9 • Modern Compute</div>
+                <h3>Containers & Serverless Architectures</h3>
+                <p>Move away from legacy virtual machines. Learn to architect scalable microservices that can automatically handle millions of requests while minimizing cost.</p>
+                <div class="lab-box">
+                    <h4>Hands-on Labs Included</h4>
+                    <ul>
+                        <li>Containerize an application using Docker & Azure Container Registry.</li>
+                        <li>Deploy a cluster on Azure Kubernetes Service (AKS).</li>
+                        <li>Build event-driven automation using Azure Functions.</li>
+                    </ul>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Kubernetes (AKS)</span>
+                    <span class="tech-tag">Serverless</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content">
+                <div class="week-badge">Weeks 10-12 • Mastery</div>
+                <h3>Infrastructure as Code (IaC) & CI/CD</h3>
+                <p>Stop configuring servers manually. You will learn to write enterprise-grade code to automatically deploy, update, and destroy entire environments in minutes.</p>
+                <div class="lab-box">
+                    <h4>Hands-on Labs Included</h4>
+                    <ul>
+                        <li>Write declarative infrastructure templates using Bicep.</li>
+                        <li>State management and deployment using Terraform.</li>
+                        <li>Automate deployments using GitHub Actions pipelines.</li>
+                    </ul>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Terraform</span>
+                    <span class="tech-tag">Azure Bicep</span>
+                    <span class="tech-tag">GitHub Actions</span>
+                </div>
+            </div>
+        </div>
+
     </main>
 
+    <div class="sticky-cta" id="bottomCTA">
+        <div class="cta-text">Ready to transform your cloud career?</div>
+        <div>
+            <a href="index.html#enroll" class="btn-primary">Enroll for the Next Batch</a>
+        </div>
+    </div>
+
     <script>
-        // Interactive Accordion Logic
-        function toggleModule(element) {
-            const content = element.nextElementSibling;
-            const icon = element.querySelector('.icon');
-            
-            // Close all others
-            document.querySelectorAll('.module-content').forEach(el => {
-                if(el !== content) {
-                    el.classList.remove('active');
-                    el.previousElementSibling.querySelector('.icon').innerText = '+';
-                    el.previousElementSibling.querySelector('.icon').style.transform = 'rotate(0deg)';
+        // Scroll Animation Observer for Timeline Items
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2 // Trigger when 20% of the element is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Optional: Stop observing once it's visible if you only want it to animate once
+                    // observer.unobserve(entry.target); 
                 }
             });
+        }, observerOptions);
 
-            // Toggle clicked
-            if (content.classList.contains('active')) {
-                content.classList.remove('active');
-                icon.innerText = '+';
-                icon.style.transform = 'rotate(0deg)';
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Sticky CTA logic - show after scrolling past header
+        window.addEventListener('scroll', () => {
+            const cta = document.getElementById('bottomCTA');
+            if (window.scrollY > 400) {
+                cta.classList.add('visible');
             } else {
-                content.classList.add('active');
-                icon.innerText = '×';
-                icon.style.transform = 'rotate(90deg)';
+                cta.classList.remove('visible');
             }
-        }
+        });
     </script>
 </body>
 </html>
