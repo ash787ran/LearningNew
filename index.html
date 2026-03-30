@@ -47,14 +47,18 @@
         .logos:hover { opacity: 0.8; }
         .logos h3 { font-family: 'Plus Jakarta Sans'; font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 8px;}
 
-        /* Meet the Architect */
-        .instructor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 4rem; }
-        .instructor-img { width: 100%; aspect-ratio: 1/1; background: #222 url('https://placehold.co/600x600/1a1a1a/0078D4?text=Instructor+Photo') center/cover; border-radius: 16px; border: 1px solid var(--border); }
-        .instructor-bio h3 { font-family: 'Plus Jakarta Sans'; font-size: 2.5rem; margin-bottom: 10px; }
-        .instructor-bio h4 { color: var(--primary); margin-bottom: 20px; font-weight: 600; }
-        .instructor-bio p { color: #ccc; line-height: 1.7; margin-bottom: 20px; }
-        .stat-badges { display: flex; gap: 15px; margin-top: 20px; }
-        .stat-badge { background: #000; border: 1px solid var(--border); padding: 10px 15px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; }
+        /* Meet the Architects - Multi-Professor Upgrades */
+        .architect-container { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 4rem; }
+        .architect-banner { width: 100%; height: 400px; background: #222 url('image_0.png') center/cover; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 40px; position: relative; }
+        .architect-banner::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(180deg, transparent 0%, #111111 100%); }
+        .architect-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .architect-card { padding: 20px; border-left: 2px solid var(--border); }
+        .architect-card:hover { border-color: var(--primary); }
+        .architect-card h3 { font-family: 'Plus Jakarta Sans'; font-size: 1.8rem; margin-bottom: 8px; font-weight: 800; letter-spacing: -0.5px;}
+        .architect-card h4 { color: var(--primary); margin-bottom: 15px; font-weight: 600; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;}
+        .architect-card p { color: #ccc; line-height: 1.7; font-size: 0.9rem; margin-bottom: 20px;}
+        .stat-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px;}
+        .stat-badge { background: #000; border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; color: #a1a1aa;}
 
         /* Testimonials */
         .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
@@ -101,9 +105,12 @@
         /* Footer */
         footer { border-top: 1px solid var(--border); padding: 40px 5%; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
 
-        @media (max-width: 768px) { 
+        @media (max-width: 900px) { 
             .nav-links { display: none; } .hero h1 { font-size: 3.2rem; } 
-            .instructor-grid { grid-template-columns: 1fr; padding: 2rem; }
+            .architect-container { padding: 2rem; }
+            .architect-banner { height: 250px; }
+            .architect-details { grid-template-columns: 1fr; gap: 20px; }
+            .architect-card { padding: 0 0 20px 10px; border-left: 2px solid var(--border); }
             .pricing-card { padding: 30px; }
         }
     </style>
@@ -116,7 +123,7 @@
         <nav>
             <a href="#" class="logo">Cloud<span>Learning</span></a>
             <div class="nav-links">
-                <a href="#instructor">The Architect</a>
+                <a href="#architects">The Architects</a>
                 <a href="syllabus.html">Curriculum</a>
                 <a href="#enroll" class="btn btn-primary" style="padding: 8px 20px;">Enroll Now</a>
                 <a href="portal.html" class="btn btn-outline" style="padding: 8px 20px; border: none;">Login</a>
@@ -141,21 +148,42 @@
             </div>
         </section>
 
-        <section id="instructor">
-            <h2 class="section-title">Meet Your Architect</h2>
-            <p class="section-subtitle">You aren't just buying a course; you are investing in 15 years of hard-earned production experience.</p>
+        <section id="architects">
+            <h2 class="section-title">Meet Your Architects</h2>
+            <p class="section-subtitle">You aren't just buying a course; you are investing in a collective 40+ years of hard-earned production experience.</p>
             
-            <div class="instructor-grid">
-                <div class="instructor-img"></div>
-                <div class="instructor-bio">
-                    <h3>P. Behera</h3>
-                    <h4>Principal Cloud Architect</h4>
-                    <p>With over 15 years of experience designing and securing enterprise-grade cloud environments, I've seen it all. I don't teach theory; I teach what actually breaks in production and how to fix it.</p>
-                    <p>I built this bootcamp to bridge the gap between passing a certification and actually surviving your first day as a Cloud Architect.</p>
-                    <div class="stat-badges">
-                        <div class="stat-badge">15+ Years Exp</div>
-                        <div class="stat-badge">Azure Certified Expert</div>
-                        <div class="stat-badge">500+ Students Mentored</div>
+            <div class="architect-container">
+                <div class="architect-banner"></div>
+                
+                <div class="architect-details">
+                    <div class="architect-card">
+                        <h3>M Chatterjee</h3>
+                        <h4>Data & AI Specialist</h4>
+                        <p>Specializing in integrating massive-scale data lakes and streaming analytics with Azure. I teach you how to turn raw cloud infrastructure into intelligent systems.</p>
+                        <div class="stat-badges">
+                            <div class="stat-badge">Azure AI Certified</div>
+                            <div class="stat-badge">Big Data Lead</div>
+                        </div>
+                    </div>
+
+                    <div class="architect-card">
+                        <h3>P BEJ</h3>
+                        <h4>Core Infrastructure Architect</h4>
+                        <p>With over 15 years designing and securing enterprise networking and compute topology. I don't teach theory; I teach what actually breaks in production and how to fix it.</p>
+                        <div class="stat-badges">
+                            <div class="stat-badge">15+ Years Exp</div>
+                            <div class="stat-badge">Certified Expert</div>
+                        </div>
+                    </div>
+
+                    <div class="architect-card">
+                        <h3>A RANJAN</h3>
+                        <h4>DevOps & IaC Expert</h4>
+                        <p>Bridging the gap between dev teams and production. I specialize in complete environmental automation using Terraform, Bicep, and GitHub Actions.</p>
+                        <div class="stat-badges">
+                            <div class="stat-badge">Terraform Certified</div>
+                            <div class="stat-badge">SRE Lead</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -166,17 +194,17 @@
             <div class="testimonial-grid">
                 <div class="review-card">
                     <div class="stars">★★★★★</div>
-                    <p class="review-text">"Absolutely the best ₹5k I've ever spent on my career. The live labs make all the difference. I cleared my AZ-305 exam within 4 weeks of finishing the batch."</p>
+                    <p class="review-text">"Absolutely the best ₹5k I've ever spent on my career. Having access to three specialized mentors with specific industry credentials is a game changer."</p>
                     <div class="reviewer">Rahul S.<span>Cloud Engineer</span></div>
                 </div>
                 <div class="review-card">
                     <div class="stars">★★★★★</div>
-                    <p class="review-text">"I was stuck as a SysAdmin for years. This bootcamp gave me the confidence to architect real solutions. I just landed a Senior Azure role at a Fortune 500 company."</p>
+                    <p class="review-text">"P BEJ's networking section alone is worth the price. This bootcamp gave me the confidence to architect real solutions. I just landed a Senior Azure role."</p>
                     <div class="reviewer">Priya M.<span>Senior Systems Architect</span></div>
                 </div>
                 <div class="review-card">
                     <div class="stars">★★★★★</div>
-                    <p class="review-text">"Unlike Udemy courses, having 1-on-1 access to a mentor with 15 years of experience is a game changer. He answers questions that textbooks completely ignore."</p>
+                    <p class="review-text">"I was struggling with IaC until A RANJAN's modules. Now I'm automating complete environments using Bicep. Excellent, direct mentorship."</p>
                     <div class="reviewer">Amit D.<span>DevOps Specialist</span></div>
                 </div>
             </div>
@@ -317,7 +345,7 @@
         function sendWA() {
             const msg = document.getElementById('waInput').value.trim();
             if (!msg) return;
-            const phone = "+14372999816"; // <-- CHANGE THIS TO YOUR NUMBER
+            const phone = "1234567890"; // <-- CHANGE THIS TO YOUR NUMBER
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
             document.getElementById('waInput').value = '';
         }
