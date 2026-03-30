@@ -263,7 +263,7 @@
         function sendWA() {
             const msg = document.getElementById('waInput').value.trim();
             if (!msg) return;
-            const phone = "1234567890"; // <-- CHANGE THIS TO YOUR NUMBER
+            const phone = "+14372999816"; // <-- CHANGE THIS TO YOUR NUMBER
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
             document.getElementById('waInput').value = '';
         }
