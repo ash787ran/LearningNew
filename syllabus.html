@@ -3,27 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Syllabus | CloudLearning</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <title>Syllabus | CloudLearning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #334155; margin: 0; padding: 40px 5%; text-align: center; }
-        .container { max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h1 { color: #0078d4; margin-bottom: 20px; }
-        .btn { display: inline-block; background: #0078d4; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; margin-top: 20px; }
+        :root { --bg-dark: #0b0f19; --surface: #111827; --primary: #0ea5e9; --text-main: #f8fafc; --border: rgba(255, 255, 255, 0.1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Inter', sans-serif; padding: 40px 5%; }
+        
+        nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem; font-weight: 800; color: white; text-decoration: none; }
+        .logo span { color: var(--primary); }
+        .btn { padding: 8px 20px; background: var(--surface); border: 1px solid var(--border); color: white; border-radius: 8px; text-decoration: none; transition: 0.3s; }
+        .btn:hover { border-color: var(--primary); }
+
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.5rem; margin-bottom: 10px; }
+        p.subtitle { color: #94a3b8; margin-bottom: 40px; font-size: 1.1rem; }
+
+        .module { background: var(--surface); border: 1px solid var(--border); padding: 24px; border-radius: 12px; margin-bottom: 20px; transition: 0.3s; }
+        .module:hover { border-color: var(--primary); transform: translateX(5px); }
+        .module h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.2rem; }
+        .module p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; }
     </style>
 </head>
 <body>
+
     <div class="container">
+        <nav>
+            <a href="index.html" class="logo">Cloud<span>Learning</span></a>
+            <div>
+                <a href="index.html" class="btn">Home</a>
+                <a href="portal.html" class="btn" style="background: var(--primary); border: none; margin-left: 10px;">Portal</a>
+            </div>
+        </nav>
+
         <h1>Azure Masterclass Syllabus</h1>
-        <p>Here you will list out the detailed week-by-week curriculum for your live batches.</p>
-        <ul style="text-align: left; margin: 30px auto; max-width: 400px; line-height: 2;">
-            <li><strong>Week 1:</strong> Cloud Computing Fundamentals</li>
-            <li><strong>Week 2:</strong> Azure Networking & Virtual Machines</li>
-            <li><strong>Week 3:</strong> Identity & Security (Azure AD)</li>
-            <li><strong>Week 4:</strong> Real-world Architecture Projects</li>
-        </ul>
-        <a href="index.html" class="btn">Back to Home</a>
-        <a href="portal.html" class="btn" style="background: #0f172a; margin-left: 10px;">Go to Portal</a>
+        <p class="subtitle">Complete roadmap for the 2026 Live Certification Batch.</p>
+
+        <div class="module">
+            <h3>Module 1: Cloud Concepts & Architecture</h3>
+            <p>Understand IaaS, PaaS, and SaaS. We will cover the core architectural components of Azure including Regions, Availability Zones, and Resource Groups.</p>
+        </div>
+
+        <div class="module">
+            <h3>Module 2: Core Services & Networking</h3>
+            <p>Hands-on labs creating Virtual Machines, configuring Azure Virtual Networks (VNet), peering, and understanding load balancers.</p>
+        </div>
+
+        <div class="module">
+            <h3>Module 3: Security & Identity</h3>
+            <p>Deep dive into Microsoft Entra ID (formerly Azure AD). Learn Role-Based Access Control (RBAC), Multi-Factor Authentication, and Zero Trust security models.</p>
+        </div>
     </div>
+
 </body>
 </html>
