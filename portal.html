@@ -4,70 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Portal | CloudLearning</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root { --brand-blue: #0078d4; --brand-dark: #0f172a; --bg-light: #f8fafc; --text-main: #334155; --border-color: #e2e8f0; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { color: var(--text-main); background-color: var(--bg-light); line-height: 1.6; }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: white; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 1.4rem; font-weight: 800; color: var(--brand-dark); text-decoration: none; }
-        .logo span { color: var(--brand-blue); }
-        .nav-actions { display: flex; gap: 10px; }
-        .btn { background: var(--brand-blue); color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; border: none; cursor: pointer; transition: 0.2s; min-height: 44px; }
-        .btn:hover { background: #006abc; }
-        .btn-outline { background: transparent; color: var(--brand-dark); border: 1px solid var(--border-color); }
-        .hero { text-align: center; padding: 80px 5%; background: white; border-bottom: 1px solid var(--border-color); }
-        .hero h1 { font-size: 2.5rem; color: var(--brand-dark); margin-bottom: 15px; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(4px); }
-        .modal { background: white; padding: 40px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); position: relative; }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #94a3b8; border: none; background: transparent; }
-        .input-group { margin-bottom: 15px; text-align: left; }
-        .input-group label { display: block; font-size: 0.9rem; margin-bottom: 5px; font-weight: 500; }
-        .input-group input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; font-size: 1rem; }
+        :root { --bg-dark: #0b0f19; --surface: #111827; --primary: #0ea5e9; --text-main: #f8fafc; --border: rgba(255, 255, 255, 0.1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Inter', sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
+        
+        nav { padding: 1.5rem 5%; border-bottom: 1px solid var(--border); }
+        .logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem; font-weight: 800; color: white; text-decoration: none; }
+        .logo span { color: var(--primary); }
+
+        .auth-container { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .auth-box { background: var(--surface); border: 1px solid var(--border); padding: 40px; border-radius: 16px; width: 100%; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .auth-box h2 { font-family: 'Plus Jakarta Sans', sans-serif; margin-bottom: 8px; font-size: 1.8rem; }
+        .auth-box p { color: #94a3b8; margin-bottom: 24px; font-size: 0.9rem; }
+        
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 500; }
+        .input-group input { width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 8px; color: white; outline: none; transition: 0.3s; }
+        .input-group input:focus { border-color: var(--primary); }
+        
+        .btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: #0284c7; }
     </style>
 </head>
 <body>
+
     <nav>
         <a href="index.html" class="logo">Cloud<span>Portal</span></a>
-        <div class="nav-actions">
-            <button class="btn btn-outline" onclick="openModal('loginModal')">Log In</button>
-            <button class="btn" onclick="openModal('signupModal')">Sign Up</button>
-        </div>
     </nav>
 
-    <header class="hero">
-        <h1>Welcome to the Live Training Portal</h1>
-        <p>Log in to access your live class links, assignments, and mentorship resources.</p>
-    </header>
-
-    <div class="modal-overlay" id="loginModal">
-        <div class="modal">
-            <button class="close-btn" onclick="closeModal('loginModal')">&times;</button>
-            <h2 style="margin-bottom: 20px; color: var(--brand-dark);">Student Log In</h2>
-            <div class="input-group"><label>Email</label><input type="email" placeholder="student@example.com"></div>
-            <div class="input-group"><label>Password</label><input type="password" placeholder="••••••••"></div>
-            <button class="btn" style="width: 100%;">Log In</button>
+    <div class="auth-container">
+        <div class="auth-box">
+            <h2>Welcome Back</h2>
+            <p>Enter your credentials to access live classes.</p>
+            
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="student@example.com">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" placeholder="••••••••">
+            </div>
+            <button class="btn" onclick="alert('Demo Login Successful!')">Log In</button>
+            <p style="text-align: center; margin-top: 20px; cursor: pointer; color: var(--primary);">Forgot Password?</p>
         </div>
     </div>
 
-    <div class="modal-overlay" id="signupModal">
-        <div class="modal">
-            <button class="close-btn" onclick="closeModal('signupModal')">&times;</button>
-            <h2 style="margin-bottom: 20px; color: var(--brand-dark);">Create Account</h2>
-            <div class="input-group"><label>Name</label><input type="text" placeholder="John Doe"></div>
-            <div class="input-group"><label>Email</label><input type="email" placeholder="student@example.com"></div>
-            <div class="input-group"><label>Password</label><input type="password" placeholder="••••••••"></div>
-            <button class="btn" style="width: 100%;">Register</button>
-        </div>
-    </div>
-
-    <script>
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('loginModal')) closeModal('loginModal');
-            if (event.target == document.getElementById('signupModal')) closeModal('signupModal');
-        }
-    </script>
 </body>
 </html>
