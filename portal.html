@@ -78,14 +78,24 @@
         function handleLogin(e) {
             e.preventDefault();
             const btn = document.getElementById('loginBtn');
+            const password = document.getElementById('password').value; // Grab the typed password
+            
             btn.classList.add('loading'); // Triggers the animated spinner
             
             // Simulating a backend check
             setTimeout(() => {
                 btn.classList.remove('loading');
-                alert('Authentication system ready for backend integration.');
-                window.location.href = "index.html"; // Routes back home for now
-            }, 1500);
+                
+                // --- THE MASTER KEY CHECK ---
+                if (password === "Azure2026") {
+                    // Success! Go to the secret dashboard
+                    window.location.href = "dashboard.html"; 
+                } else {
+                    // Failure! Show an error
+                    alert('Access Denied: Incorrect password.');
+                }
+                
+            }, 1500); // 1.5 second loading delay to look realistic
         }
     </script>
 </body>
