@@ -3,88 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CloudLearning | Interactive Academy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>CloudLearning | Enterprise Azure Training</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root { --azure-blue: #0078d4; --azure-dark: #005a9e; --bg-deep: #050b14; --text-main: #ffffff; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-deep); color: var(--text-main); overflow: hidden; }
-        #networkCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-        .content-wrapper { position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; background: radial-gradient(circle at center, rgba(5, 11, 20, 0.4) 0%, rgba(5, 11, 20, 0.9) 100%); }
-        .badge { background: rgba(0, 120, 212, 0.2); color: #60a5fa; padding: 8px 16px; border-radius: 50px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(0, 120, 212, 0.4); margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
-        h1 { font-size: clamp(3rem, 8vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
-        h1 span { color: var(--azure-blue); text-shadow: 0 0 20px rgba(0, 120, 212, 0.5); }
-        p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin-bottom: 40px; }
-        .btn-group { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        .btn { padding: 16px 32px; border-radius: 8px; font-size: 1.1rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; }
-        .btn-primary { background: var(--azure-blue); color: white; box-shadow: 0 10px 20px -5px rgba(0, 120, 212, 0.5); }
-        .btn-primary:hover { background: var(--azure-dark); transform: translateY(-3px); }
-        .btn-outline { background: rgba(255, 255, 255, 0.05); color: white; border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); }
-        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-3px); }
-        @media (max-width: 768px) { .btn-group { flex-direction: column; width: 100%; max-width: 300px; } .btn { width: 100%; } }
+        :root {
+            --bg-dark: #0b0f19;
+            --surface: #111827;
+            --surface-hover: #1f2937;
+            --primary: #0ea5e9; /* Light Azure Blue */
+            --accent: #8b5cf6; /* Purple for gradients */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .logo { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* Sleek Glass Navbar */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 5%;
+            background: rgba(11, 15, 25, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; color: white; text-decoration: none; letter-spacing: -0.5px; }
+        .logo span { color: var(--primary); }
+
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        .btn {
+            padding: 10px 24px; border-radius: 8px; font-weight: 600; text-decoration: none;
+            transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center;
+        }
+        
+        .btn-primary { background: var(--primary); color: white; border: none; }
+        .btn-primary:hover { background: #0284c7; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3); }
+        
+        /* Modern Gradient Hero Section */
+        .hero {
+            position: relative;
+            padding: 180px 5% 100px;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            overflow: hidden;
+        }
+
+        /* Ambient Background Glows */
+        .hero::before {
+            content: ''; position: absolute; top: -10%; left: 20%; width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+            border-radius: 50%; z-index: -1;
+        }
+        .hero::after {
+            content: ''; position: absolute; top: 20%; right: 10%; width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%; z-index: -1;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
+            padding: 6px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 500;
+            color: var(--primary); margin-bottom: 24px; backdrop-filter: blur(4px);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; line-height: 1.1;
+            margin-bottom: 24px; max-width: 900px; letter-spacing: -1px;
+        }
+
+        /* Gradient Text Effect */
+        .text-gradient {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem; color: var(--text-muted); max-width: 600px;
+            margin-bottom: 40px; line-height: 1.6;
+        }
+
+        .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+        /* Trust/Stats Banner */
+        .stats {
+            display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
+            padding: 40px 5%; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .stat-item { text-align: center; }
+        .stat-num { font-size: 2rem; font-family: 'Plus Jakarta Sans'; font-weight: 800; color: white; }
+        .stat-label { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+        /* Premium Course Grid */
+        .section-title { text-align: center; padding: 80px 5% 40px; }
+        .section-title h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 16px; }
+        .section-title p { color: var(--text-muted); font-size: 1.1rem; }
+
+        .container { padding: 0 5% 100px; max-width: 1200px; margin: 0 auto; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(14, 165, 233, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: var(--surface-hover);
+        }
+
+        /* Top highlight bar on cards */
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .card:hover::before { opacity: 1; }
+
+        .card-icon {
+            width: 48px; height: 48px; background: rgba(14, 165, 233, 0.1);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: var(--primary); margin-bottom: 20px;
+        }
+
+        .card h3 { font-size: 1.4rem; margin-bottom: 12px; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px; line-height: 1.6; }
+        
+        .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 20px; }
+        .card-duration { font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+        
+        .link-arrow { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 4px; }
+        .link-arrow:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Hide links on mobile, keep logo and CTA */
+            .hero { padding: 140px 5% 60px; }
+            .hero h1 { font-size: 2.5rem; }
+            .stats { gap: 2rem; }
+        }
     </style>
 </head>
 <body>
-    <canvas id="networkCanvas"></canvas>
-    <div class="content-wrapper">
-        <div class="badge">Live Architecture Simulation</div>
-        <h1>Master <span>Azure</span> Cloud</h1>
-        <p>Experience the most dynamic, hands-on infrastructure training available.</p>
-        <div class="btn-group">
-            <a href="portal.html" class="btn btn-primary">Enter the Academy</a>
-            <a href="syllabus.html" class="btn btn-outline">Explore Syllabus</a>
+
+    <nav>
+        <a href="#" class="logo">Cloud<span>Learning</span></a>
+        <div class="nav-links">
+            <a href="#curriculum">Curriculum</a>
+            <a href="#mentorship">Mentorship</a>
+            <a href="portal.html" class="btn btn-primary" style="padding: 8px 20px;">Student Portal</a>
         </div>
-    </div>
+    </nav>
 
-    <script>
-        const canvas = document.getElementById('networkCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let particlesArray = [];
-        let mouse = { x: null, y: null, radius: 150 }
-        window.addEventListener('mousemove', function(event) { mouse.x = event.x; mouse.y = event.y; });
-        window.addEventListener('mouseout', function() { mouse.x = undefined; mouse.y = undefined; });
-        window.addEventListener('resize', function() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
+    <header class="hero">
+        <div class="badge">Live Instructor-Led Training 2026</div>
+        <h1>Architect the Future with <span class="text-gradient">Microsoft Azure</span></h1>
+        <p>Enterprise-grade cloud training. Skip the pre-recorded tutorials and master cloud infrastructure through live, hands-on mentorship and real-world scenarios.</p>
+        
+        <div class="hero-btns">
+            <a href="syllabus.html" class="btn btn-primary" style="padding: 14px 32px; font-size: 1.1rem;">View Full Syllabus</a>
+            <a href="portal.html" class="btn" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; padding: 14px 32px; font-size: 1.1rem;">Log In</a>
+        </div>
+    </header>
 
-        class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color; this.baseX = this.x; this.baseY = this.y; this.density = (Math.random() * 30) + 1;
-            }
-            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = this.color; ctx.fill(); }
-            update() {
-                let dx = mouse.x - this.x; let dy = mouse.y - this.y; let distance = Math.sqrt(dx * dx + dy * dy);
-                let forceDirectionX = dx / distance; let forceDirectionY = dy / distance;
-                let force = (mouse.radius - distance) / mouse.radius;
-                let directionX = forceDirectionX * force * this.density; let directionY = forceDirectionY * force * this.density;
-                if (distance < mouse.radius) { this.x -= directionX; this.y -= directionY; } 
-                else { if (this.x !== this.baseX) { this.x -= (this.x - this.baseX) / 10; } if (this.y !== this.baseY) { this.y -= (this.y - this.baseY) / 10; } }
-                this.baseX += this.directionX; this.baseY += this.directionY;
-                if (this.baseX < 0 || this.baseX > canvas.width) this.directionX = -this.directionX;
-                if (this.baseY < 0 || this.baseY > canvas.height) this.directionY = -this.directionY;
-                this.draw();
-            }
-        }
-        function init() {
-            particlesArray = []; let numberOfParticles = (canvas.height * canvas.width) / 15000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * 2) + 1;
-                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-                particlesArray.push(new Particle(x, y, (Math.random() * 1) - 0.5, (Math.random() * 1) - 0.5, size, '#0078d4'));
-            }
-        }
-        function connect() {
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                        ctx.strokeStyle = 'rgba(0, 120, 212,' + (1 - (distance / 20000)) + ')'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke();
-                    }
-                }
-            }
-        }
-        function animate() { requestAnimationFrame(animate); ctx.clearRect(0, 0, innerWidth, innerHeight); for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); } connect(); }
-        init(); animate();
-    </script>
+    <section class="stats">
+        <div class="stat-item">
+            <div class="stat-num">Live</div>
+            <div class="stat-label">1-on-1 Mentorship</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Hands-on Labs</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">AZ-900+</div>
+            <div class="stat-label">Certification Ready</div>
+        </div>
+    </section>
+
+    <section class="section-title" id="curriculum">
+        <h2>Professional Learning Paths</h2>
+        <p>Structured curriculum designed to take you from fundamentals to expert architect.</p>
+    </section>
+
+    <main class="container">
+        <div class="grid">
+            
+            <div class="card">
+                <div class="card-icon">☁️</div>
+                <h3>Azure Fundamentals</h3>
+                <p>Build a rock-solid foundation. Master core cloud concepts, networking basics, and Azure infrastructure from the ground up.</p>
+                <div class="card-footer">
+                    <span class="card-duration">⏱️ 4 Weeks</span>
+                    <a href="syllabus.html" class="link-arrow">Details &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔐</div>
+                <h3>Azure Administrator</h3>
+                <p>Deploy, manage, and monitor cloud environments. Learn identity management, virtual networks, and storage solutions.</p>
+                <div class="card-footer">
+                    <span class="card-duration">⏱️ 8 Weeks</span>
+                    <a href="syllabus.html" class="link-arrow">Details &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🏛️</div>
+                <h3>Solutions Architect</h3>
+                <p>Design enterprise systems. Master high availability, disaster recovery, data integration, and secure infrastructure design.</p>
+                <div class="card-footer">
+                    <span class="card-duration">⏱️ 12 Weeks</span>
+                    <a href="syllabus.html" class="link-arrow">Details &rarr;</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem;">
+        &copy; 2026 CloudLearning Academy. Built for the modern cloud engineer.
+    </footer>
+
 </body>
 </html>
