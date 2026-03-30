@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CloudLearning | Elite Azure Architecture</title>
+    <title>CloudLearning | Elite Multi-Cloud Architecture</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
@@ -36,38 +36,40 @@
         .section-subtitle { text-align: center; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 3rem; max-width: 600px; margin-inline: auto; }
 
         /* Hero */
-        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, rgba(0, 120, 212, 0.1) 0%, transparent 60%); padding-top: 120px; }
+        .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, rgba(0, 120, 212, 0.1) 0%, transparent 60%); padding-top: 120px; }
         .pill { border: 1px solid rgba(0, 120, 212, 0.3); background: rgba(0, 120, 212, 0.1); padding: 8px 20px; border-radius: 100px; font-size: 0.85rem; font-weight: 700; color: #60a5fa; margin-bottom: 2rem; text-transform: uppercase; }
         .hero h1 { font-family: 'Plus Jakarta Sans'; font-size: clamp(3.5rem, 8vw, 6.5rem); font-weight: 900; line-height: 1.05; letter-spacing: -2px; margin-bottom: 1.5rem; max-width: 1000px; }
         .hero p { font-size: 1.25rem; color: #a1a1aa; max-width: 650px; margin-bottom: 3rem; line-height: 1.6; }
-        .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 4rem; }
+        .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
 
-        /* Trusted Logos */
-        .logos { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; opacity: 0.5; filter: grayscale(100%); transition: 0.3s; margin-top: 2rem;}
-        .logos:hover { opacity: 0.8; }
-        .logos h3 { font-family: 'Plus Jakarta Sans'; font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 8px;}
+        /* --- THE ANIMATED TECH STACK MARQUEE --- */
+        .tech-ecosystem { padding: 60px 0; border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.4); overflow: hidden; width: 100%; position: relative; }
+        .tech-ecosystem p { text-align: center; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; font-weight: 600; }
+        
+        /* The fading edge mask for a premium look */
+        .marquee-wrapper { display: flex; width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); }
+        
+        .marquee-content { display: flex; flex-shrink: 0; align-items: center; justify-content: space-around; min-width: 100%; animation: scroll 25s linear infinite; gap: 4rem; padding-right: 4rem; }
+        
+        /* Hover to pause animation */
+        .marquee-wrapper:hover .marquee-content { animation-play-state: paused; }
+        
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+        
+        .tech-item { display: flex; align-items: center; gap: 12px; font-family: 'Plus Jakarta Sans'; font-size: 1.5rem; font-weight: 800; color: #555; transition: 0.3s; cursor: default; }
+        .tech-item:hover { color: var(--text-main); transform: scale(1.05); }
+        .tech-item svg { height: 40px; width: auto; fill: currentColor; }
+        /* -------------------------------------- */
 
-        /* Meet the Architects - Multi-Professor Upgrades */
+        /* Meet the Architects */
         .architect-container { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 4rem; }
-        .architect-banner { width: 100%; height: 400px; background: #222 url('image_0.png') center/cover; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 40px; position: relative; }
-        .architect-banner::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(180deg, transparent 0%, #111111 100%); }
+        .architect-banner { width: 100%; height: 350px; background: #222 url('https://placehold.co/1200x600/1a1a1a/0078D4?text=Our+Cloud+Experts') center/cover; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 40px; position: relative; }
         .architect-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .architect-card { padding: 20px; border-left: 2px solid var(--border); }
         .architect-card:hover { border-color: var(--primary); }
         .architect-card h3 { font-family: 'Plus Jakarta Sans'; font-size: 1.8rem; margin-bottom: 8px; font-weight: 800; letter-spacing: -0.5px;}
         .architect-card h4 { color: var(--primary); margin-bottom: 15px; font-weight: 600; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;}
         .architect-card p { color: #ccc; line-height: 1.7; font-size: 0.9rem; margin-bottom: 20px;}
-        .stat-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px;}
-        .stat-badge { background: #000; border: 1px solid var(--border); padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; color: #a1a1aa;}
-
-        /* Testimonials */
-        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .review-card { background: var(--surface); border: 1px solid var(--border); padding: 30px; border-radius: 16px; transition: 0.3s; }
-        .review-card:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .stars { color: #FBBF24; font-size: 1.2rem; margin-bottom: 15px; }
-        .review-text { font-style: italic; color: #ddd; margin-bottom: 20px; line-height: 1.6; }
-        .reviewer { font-weight: 700; font-family: 'Plus Jakarta Sans'; }
-        .reviewer span { display: block; font-size: 0.85rem; color: var(--text-muted); font-weight: 400; font-family: 'Inter'; }
 
         /* Pricing & Checkout */
         .pricing-section { display: flex; justify-content: center; }
@@ -79,16 +81,8 @@
         .features-list { list-style: none; text-align: left; margin: 30px 0; }
         .features-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; color: #ccc; }
         .features-list li::before { content: '✓'; color: #10B981; font-weight: bold; }
-        .payment-methods { display: flex; justify-content: center; gap: 10px; margin-top: 20px; color: var(--text-muted); font-size: 0.85rem; align-items: center; }
-        .pay-icon { background: white; color: black; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 0.7rem; }
 
-        /* FAQ Accordion */
-        .faq-item { border-bottom: 1px solid var(--border); }
-        .faq-q { padding: 20px 0; font-weight: 600; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: space-between; }
-        .faq-a { max-height: 0; overflow: hidden; transition: 0.3s; color: #aaa; line-height: 1.6; }
-        .faq-a.open { max-height: 200px; padding-bottom: 20px; }
-
-        /* WhatsApp Widget Styles */
+        /* WhatsApp Widget */
         .wa-widget { position: fixed; bottom: 30px; right: 30px; z-index: 9999; }
         .wa-toggle { width: 65px; height: 65px; border-radius: 50%; background: #25D366; color: white; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); transition: 0.3s; display: flex; align-items: center; justify-content: center; }
         .wa-toggle:hover { transform: scale(1.1) rotate(5deg); }
@@ -102,17 +96,7 @@
         .wa-input-area input { flex-grow: 1; background: #222; border: 1px solid #333; border-radius: 20px; padding: 12px 16px; color: white; outline: none; }
         .wa-send { background: #25D366; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-weight: bold; }
 
-        /* Footer */
-        footer { border-top: 1px solid var(--border); padding: 40px 5%; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
-
-        @media (max-width: 900px) { 
-            .nav-links { display: none; } .hero h1 { font-size: 3.2rem; } 
-            .architect-container { padding: 2rem; }
-            .architect-banner { height: 250px; }
-            .architect-details { grid-template-columns: 1fr; gap: 20px; }
-            .architect-card { padding: 0 0 20px 10px; border-left: 2px solid var(--border); }
-            .pricing-card { padding: 30px; }
-        }
+        @media (max-width: 900px) { .nav-links { display: none; } .hero h1 { font-size: 3.2rem; } .architect-details { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -131,81 +115,60 @@
         </nav>
 
         <section class="hero">
-            <div class="pill">Next Batch: Enrollments Open</div>
+            <div class="pill">Master the Multi-Cloud Ecosystem</div>
             <h1>Deploy Faster.<br>Scale Smarter.</h1>
-            <p>Master Microsoft Azure infrastructure through rigorous, instructor-led live training. Built for engineers who want to architect the future.</p>
+            <p>Master AWS, Microsoft Azure, and Google Cloud infrastructure through rigorous, instructor-led live training. Built for engineers who want to architect the future.</p>
             
             <div class="hero-btns">
                 <a href="#enroll" class="btn btn-primary">Enroll for ₹5,000</a>
-                <a href="syllabus.html" class="btn btn-outline">View Syllabus</a>
-            </div>
-
-            <p style="color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-top: 2rem;">Alumni are building infrastructure at</p>
-            <div class="logos">
-                <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11.4 24l-7.32-6.66V0l15.84 6.66v11.16L11.4 24zM6.48 16.2l4.92 4.44 5.28-4.2v-8.1l-10.2-4.32v12.18z"/></svg> Acorn</h3>
-                <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg> TechCorp</h3>
-                <h3><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="9" height="9"/><rect x="13" y="2" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/></svg> Microsoft</h3>
+                <a href="syllabus.html" class="btn btn-outline">View Curriculum</a>
             </div>
         </section>
 
+        <div class="tech-ecosystem">
+            <p>Technologies you will master</p>
+            <div class="marquee-wrapper">
+                <div class="marquee-content">
+                    <div class="tech-item"><svg viewBox="0 0 24 24"><path d="M11.4 24l-7.32-6.66V0l15.84 6.66v11.16L11.4 24zM6.48 16.2l4.92 4.44 5.28-4.2v-8.1l-10.2-4.32v12.18z"/></svg> Microsoft Azure</div>
+                    <div class="tech-item"><svg viewBox="0 0 24 24"><path d="M14.07 14.73c-1.39.88-3.3 1.4-5.26 1.4-3.41 0-5.83-1.64-5.83-4.87 0-3.35 2.65-5.1 6.55-5.1 1.48 0 2.8.31 3.91.82l-.65 2.22c-.93-.45-2.03-.73-3.13-.73-2.18 0-3.52 1.05-3.52 2.64 0 1.57 1.13 2.45 3 2.45 1.4 0 2.76-.39 3.94-1.07l.99 2.24zm8.01-6.17c-.52-1.3-1.38-2.31-2.48-2.92L18.44 7.6c1.08.56 1.83 1.42 2.14 2.51h-2.73c-.22-.64-.67-1.12-1.28-1.38-.64-.26-1.35-.22-1.92.11-.59.34-.94.94-.94 1.63 0 .8.53 1.34 1.43 1.68l1.41.53c1.64.62 2.57 1.61 2.57 3.01 0 1.1-.55 2.13-1.52 2.75-1.02.66-2.37.94-3.76.77l1.01-2.02c.86.13 1.7.02 2.3-.37.58-.37.93-.97.93-1.66 0-.79-.54-1.34-1.52-1.7l-1.33-.5c-1.63-.61-2.48-1.55-2.48-2.9 0-1.1.56-2.1 1.5-2.71 1-.65 2.29-.91 3.63-.73l1.19 2.04zm-14.93 6.9c1.94 1.14 4.19 1.75 6.52 1.75 2.56 0 5.03-.73 7.15-2.08l-.83-1.63c-1.9.1.8-1.9.1.8-4.04 0-6.11-.64-7.85-1.72l-1.09 1.88z"/></svg> AWS</div>
+                    <div class="tech-item"><svg viewBox="0 0 24 24"><path d="M12.02 0L2.91 5.25v10.5L12.02 21l9.11-5.25V5.25L12.02 0zm6.91 14.5l-6.91 3.98-6.91-3.98V6.52l6.91-3.98 6.91 3.98v7.98zM12 4.5l-4.5 2.6v5.2l4.5 2.6 4.5-2.6v-5.2L12 4.5z"/></svg> Google Cloud</div>
+                    <div class="tech-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Terraform</div>
+                    <div class="tech-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg> Docker</div>
+                    <div class="tech-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Kubernetes</div>
+                </div>
+                <div class="marquee-content">
+                    <div class="tech-item"><svg viewBox="0 0 24 24"><path d="M11.4 24l-7.32-6.66V0l15.84 6.66v11.16L11.4 24zM6.48 16.2l4.92 4.44 5.28-4.2v-8.1l-10.2-4.32v12.18z"/></svg> Microsoft Azure</div>
+                    <div class="tech-item"><svg viewBox="0 0 24 24"><path d="M14.07 14.73c-1.39.88-3.3 1.4-5.26 1.4-3.41 0-5.83-1.64-5.83-4.87 0-3.35 2.65-5.1 6.55-5.1 1.48 0 2.8.31 3.91.82l-.65 2.22c-.93-.45-2.03-.73-3.13-.73-2.18 0-3.52 1.05-3.52 2.64 0 1.57 1.13 2.45 3 2.45 1.4 0 2.76-.39 3.94-1.07l.99 2.24zm8.01-6.17c-.52-1.3-1.38-2.31-2.48-2.92L18.44 7.6c1.08.56 1.83 1.42 2.14 2.51h-2.73c-.22-.64-.67-1.12-1.28-1.38-.64-.26-1.35-.22-1.92.11-.59.34-.94.94-.94 1.63 0 .8.53 1.34 1.43 1.68l1.41.53c1.64.62 2.57 1.61 2.57 3.01 0 1.1-.55 2.13-1.52 2.75-1.02.66-2.37.94-3.76.77l1.01-2.02c.86.13 1.7.02 2.3-.37.58-.37.93-.97.93-1.66 0-.79-.54-1.34-1.52-1.7l-1.33-.5c-1.63-.61-2.48-1.55-2.48-2.9 0-1.1.56-2.1 1.5-2.71 1-.65 2.29-.91 3.63-.73l1.19 2.04zm-14.93 6.9c1.94 1.14 4.19 1.75 6.52 1.75 2.56 0 5.03-.73 7.15-2.08l-.83-1.63c-1.9.1.8-1.9.1.8-4.04 0-6.11-.64-7.85-1.72l-1.09 1.88z"/></svg> AWS</div>
+                    <div class="tech-item"><svg viewBox="0 0 24 24"><path d="M12.02 0L2.91 5.25v10.5L12.02 21l9.11-5.25V5.25L12.02 0zm6.91 14.5l-6.91 3.98-6.91-3.98V6.52l6.91-3.98 6.91 3.98v7.98zM12 4.5l-4.5 2.6v5.2l4.5 2.6 4.5-2.6v-5.2L12 4.5z"/></svg> Google Cloud</div>
+                    <div class="tech-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Terraform</div>
+                    <div class="tech-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg> Docker</div>
+                    <div class="tech-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Kubernetes</div>
+                </div>
+            </div>
+        </div>
+
         <section id="architects">
             <h2 class="section-title">Meet Your Architects</h2>
-            <p class="section-subtitle">You aren't just buying a course; you are investing in a collective 40+ years of hard-earned production experience.</p>
+            <p class="section-subtitle">You aren't just buying a course; you are investing in a collective 40+ years of hard-earned production experience across Azure, AWS, and GCP.</p>
             
             <div class="architect-container">
                 <div class="architect-banner"></div>
-                
                 <div class="architect-details">
                     <div class="architect-card">
                         <h3>M Chatterjee</h3>
                         <h4>Data & AI Specialist</h4>
-                        <p>Specializing in integrating massive-scale data lakes and streaming analytics with Azure. I teach you how to turn raw cloud infrastructure into intelligent systems.</p>
-                        <div class="stat-badges">
-                            <div class="stat-badge">Azure AI Certified</div>
-                            <div class="stat-badge">Big Data Lead</div>
-                        </div>
+                        <p>Specializing in integrating massive-scale data lakes and streaming analytics. I teach you how to turn raw cloud infrastructure into intelligent systems.</p>
                     </div>
-
                     <div class="architect-card">
                         <h3>P BEJ</h3>
                         <h4>Core Infrastructure Architect</h4>
-                        <p>With over 15 years designing and securing enterprise networking and compute topology. I don't teach theory; I teach what actually breaks in production and how to fix it.</p>
-                        <div class="stat-badges">
-                            <div class="stat-badge">15+ Years Exp</div>
-                            <div class="stat-badge">Certified Expert</div>
-                        </div>
+                        <p>With over 15 years designing enterprise networking and compute topology. I don't teach theory; I teach what actually breaks in production and how to fix it.</p>
                     </div>
-
                     <div class="architect-card">
                         <h3>A RANJAN</h3>
                         <h4>DevOps & IaC Expert</h4>
                         <p>Bridging the gap between dev teams and production. I specialize in complete environmental automation using Terraform, Bicep, and GitHub Actions.</p>
-                        <div class="stat-badges">
-                            <div class="stat-badge">Terraform Certified</div>
-                            <div class="stat-badge">SRE Lead</div>
-                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2 class="section-title">Engineers Trust Us</h2>
-            <div class="testimonial-grid">
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="review-text">"Absolutely the best ₹5k I've ever spent on my career. Having access to three specialized mentors with specific industry credentials is a game changer."</p>
-                    <div class="reviewer">Rahul S.<span>Cloud Engineer</span></div>
-                </div>
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="review-text">"P BEJ's networking section alone is worth the price. This bootcamp gave me the confidence to architect real solutions. I just landed a Senior Azure role."</p>
-                    <div class="reviewer">Priya M.<span>Senior Systems Architect</span></div>
-                </div>
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="review-text">"I was struggling with IaC until A RANJAN's modules. Now I'm automating complete environments using Bicep. Excellent, direct mentorship."</p>
-                    <div class="reviewer">Amit D.<span>DevOps Specialist</span></div>
                 </div>
             </div>
         </section>
@@ -214,49 +177,21 @@
             <div class="pricing-card">
                 <h3>Enterprise Masterclass</h3>
                 <div class="price">₹5,000 <span>/ one-time</span></div>
-                <p style="color: var(--text-muted);">Complete access to the upcoming live batch.</p>
+                <p style="color: var(--text-muted);">Complete access to the upcoming live multi-cloud batch.</p>
                 
                 <ul class="features-list">
                     <li>12 Weeks of Live Instructor-Led Classes</li>
-                    <li>Hands-on Azure Portal Labs & Scenarios</li>
+                    <li>Hands-on Labs in AWS, Azure & GCP</li>
                     <li>Direct WhatsApp Mentorship Access</li>
-                    <li>Lifetime Access to Session Recordings</li>
                     <li>Resume Review & Interview Prep</li>
                 </ul>
 
                 <button id="rzp-button1" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 16px;">Complete Enrollment</button>
-                
-                <div class="payment-methods">
-                    Secure checkout via <b>Razorpay</b> 
-                    <span class="pay-icon">UPI</span>
-                    <span class="pay-icon">VISA</span>
-                    <span class="pay-icon">MC</span>
-                </div>
+                <div class="payment-methods">Secure checkout via <b>Razorpay</b></div>
             </div>
         </section>
 
-        <section>
-            <h2 class="section-title">Common Questions</h2>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFaq(this)">Are the live classes recorded? <span>+</span></div>
-                    <div class="faq-a">Yes. All live sessions are recorded in high definition and uploaded to your Student Portal within 24 hours. You will have lifetime access to these recordings.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFaq(this)">Do I need coding experience? <span>+</span></div>
-                    <div class="faq-a">No prior coding experience is required. We start from cloud fundamentals. However, basic understanding of IT infrastructure (like what a server or IP address is) will be very helpful.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFaq(this)">What payment methods are accepted? <span>+</span></div>
-                    <div class="faq-a">We use Razorpay, which supports all major Indian payment methods including UPI (GPay, PhonePe, Paytm), Credit Cards, Debit Cards, and Net Banking.</div>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            &copy; 2026 CloudLearning Academy. Built for the modern cloud engineer.<br>
-            <a href="#" style="color: var(--text-muted); margin-top: 10px; display: inline-block;">Terms of Service</a> | <a href="#" style="color: var(--text-muted);">Privacy Policy</a>
-        </footer>
+        <footer>&copy; 2026 CloudLearning Academy. Built for the modern cloud engineer.</footer>
     </div>
 
     <div class="content-layer wa-widget">
@@ -266,7 +201,7 @@
                 <div><div style="font-weight: 700;">Cloud Mentor</div><div style="font-size: 0.8rem;">Typically replies instantly</div></div>
             </div>
             <div class="wa-body">
-                <div class="wa-bubble">Hi there! 👋<br><br>Ready to accelerate your tech career with Azure? Drop your questions here.</div>
+                <div class="wa-bubble">Hi there! 👋<br><br>Ready to accelerate your tech career? Drop your questions here.</div>
             </div>
             <div class="wa-input-area">
                 <input type="text" id="waInput" placeholder="Type a message..." onkeypress="if(event.key === 'Enter') sendWA()">
@@ -285,11 +220,9 @@
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         let particles = [];
         let mouse = { x: null, y: null, radius: 200 }
-        
         window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
         window.addEventListener('mouseout', () => { mouse.x = undefined; mouse.y = undefined; });
         window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
-
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
@@ -298,8 +231,7 @@
             }
             draw() { ctx.fillStyle = 'rgba(0, 120, 212, 0.8)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
             update() {
-                let dx = mouse.x - this.x; let dy = mouse.y - this.y;
-                let dist = Math.sqrt(dx * dx + dy * dy);
+                let dx = mouse.x - this.x; let dy = mouse.y - this.y; let dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < mouse.radius) {
                     this.x -= (dx / dist) * ((mouse.radius - dist) / mouse.radius) * this.density;
                     this.y -= (dy / dist) * ((mouse.radius - dist) / mouse.radius) * this.density;
@@ -316,8 +248,7 @@
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 for (let j = i; j < particles.length; j++) {
-                    let dx = particles[i].x - particles[j].x; let dy = particles[i].y - particles[j].y;
-                    let dist = Math.sqrt(dx*dx + dy*dy);
+                    let dx = particles[i].x - particles[j].x; let dy = particles[i].y - particles[j].y; let dist = Math.sqrt(dx*dx + dy*dy);
                     if (dist < 120) {
                         ctx.beginPath(); ctx.strokeStyle = `rgba(0, 120, 212, ${1 - dist/120})`;
                         ctx.lineWidth = 0.5; ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
@@ -328,19 +259,6 @@
         }
         init(); animate();
 
-        // FAQ Toggle
-        function toggleFaq(el) {
-            const answer = el.nextElementSibling;
-            const span = el.querySelector('span');
-            if (answer.classList.contains('open')) {
-                answer.classList.remove('open');
-                span.innerText = '+';
-            } else {
-                answer.classList.add('open');
-                span.innerText = '-';
-            }
-        }
-
         // WhatsApp Integration
         function sendWA() {
             const msg = document.getElementById('waInput').value.trim();
@@ -350,27 +268,10 @@
             document.getElementById('waInput').value = '';
         }
 
-        // Razorpay Integration Mockup
+        // Razorpay Mockup
         document.getElementById('rzp-button1').onclick = function(e){
             e.preventDefault();
             alert("Razorpay successfully triggered! Replace this alert with your LIVE API Key to collect payments.");
-            
-            /* OFFICIAL RAZORPAY CODE
-            var options = {
-                "key": "YOUR_KEY_ID", 
-                "amount": "500000", // ₹5,000.00
-                "currency": "INR",
-                "name": "CloudLearning Academy",
-                "description": "Enterprise Masterclass",
-                "handler": function (response){
-                    alert("Payment Successful! ID: " + response.razorpay_payment_id);
-                    window.location.href = "portal.html";
-                },
-                "theme": { "color": "#0078D4" }
-            };
-            var rzp1 = new Razorpay(options);
-            rzp1.open();
-            */
         }
     </script>
 </body>
