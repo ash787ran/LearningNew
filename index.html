@@ -3,57 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CloudLearning | Enterprise Azure Training</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <title>CloudLearning | Elite Azure Training</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-dark: #0b0f19; --surface: #111827; --primary: #0ea5e9; --text-main: #f8fafc; --text-muted: #94a3b8; --border: rgba(255, 255, 255, 0.1); }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
-        h1, h2, h3, .logo { font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        /* Navigation */
-        nav { position: fixed; top: 0; width: 100%; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: rgba(11, 15, 25, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-        .logo { font-size: 1.5rem; font-weight: 800; color: white; text-decoration: none; }
-        .logo span { color: var(--primary); }
-        .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links a { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--primary); }
-        .btn { padding: 10px 24px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: none; }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: #0284c7; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3); }
-        
-        /* Hero Section */
-        .hero { position: relative; padding: 180px 5% 100px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .hero::before { content: ''; position: absolute; top: 0; left: 20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%); border-radius: 50%; z-index: -1; }
-        .badge { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); padding: 6px 16px; border-radius: 50px; font-size: 0.85rem; color: var(--primary); margin-bottom: 24px; }
-        .hero h1 { font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 24px; max-width: 900px; }
-        .text-gradient { background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; }
-        .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+        :root {
+            --bg-base: #000000;
+            --bg-grid: rgba(255, 255, 255, 0.04);
+            --primary: #0078D4;
+            --primary-glow: rgba(0, 120, 212, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --border: #222222;
+        }
 
-        /* Chatbot Widget Styles */
-        .chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 9999; }
-        .chat-toggle { width: 60px; height: 60px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.5rem; cursor: pointer; box-shadow: 0 10px 25px rgba(14, 165, 233, 0.4); transition: transform 0.3s; display: flex; align-items: center; justify-content: center; }
-        .chat-toggle:hover { transform: scale(1.1); }
-        .chat-container { position: absolute; bottom: 80px; right: 0; width: 350px; height: 450px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); display: none; flex-direction: column; overflow: hidden; transform-origin: bottom right; animation: scaleUp 0.3s ease forwards; }
-        @keyframes scaleUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .chat-header { background: rgba(255,255,255,0.05); padding: 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
-        .chat-avatar { width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-        .chat-title { font-weight: 600; font-size: 1rem; }
-        .chat-status { font-size: 0.8rem; color: #10b981; }
-        .chat-messages { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-        .msg { padding: 12px 16px; border-radius: 12px; max-width: 85%; font-size: 0.9rem; line-height: 1.4; }
-        .msg-bot { background: rgba(255,255,255,0.05); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
-        .msg-user { background: var(--primary); align-self: flex-end; border-bottom-right-radius: 4px; }
-        .chat-input { padding: 16px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.2); display: flex; gap: 10px; }
-        .chat-input input { flex-grow: 1; background: transparent; border: 1px solid var(--border); border-radius: 8px; padding: 10px; color: white; outline: none; }
-        .chat-input input:focus { border-color: var(--primary); }
-        .chat-input button { background: var(--primary); color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            overflow-x: hidden;
+            /* Premium Tech Grid Background */
+            background-image: 
+                linear-gradient(var(--bg-grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: center center;
+        }
+
+        /* Frosted Glass Navigation */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 5%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 900; color: white; text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: var(--primary); }
+
+        .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: white; }
+
+        .btn {
+            padding: 10px 24px; border-radius: 6px; font-weight: 600; font-size: 0.9rem;
+            text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; cursor: pointer;
+        }
+        
+        /* The Glowing Button Effect */
+        .btn-primary {
+            background: var(--text-main); color: var(--bg-base); border: none;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.4); }
+
+        .btn-outline {
+            background: transparent; color: white; border: 1px solid var(--border);
+        }
+        .btn-outline:hover { border-color: var(--primary); background: rgba(0, 120, 212, 0.1); }
+
+        /* Striking Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 0 5%; position: relative;
+        }
+
+        /* Ambient Azure Glow */
+        .glow-orb {
+            position: absolute; width: 600px; height: 600px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 60%);
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: -1; pointer-events: none;
+        }
+
+        .pill {
+            border: 1px solid var(--border); background: rgba(255,255,255,0.03);
+            padding: 6px 16px; border-radius: 100px; font-size: 0.8rem; font-weight: 600;
+            color: var(--primary); margin-bottom: 2rem; letter-spacing: 1px; text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 8vw, 6.5rem); font-weight: 900; line-height: 1;
+            letter-spacing: -2px; margin-bottom: 1.5rem; max-width: 1000px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin-bottom: 3rem; line-height: 1.6;
+        }
+
+        .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+        /* Premium Floating WhatsApp Bot */
+        .wa-widget { position: fixed; bottom: 30px; right: 30px; z-index: 9999; }
+        .wa-toggle {
+            width: 65px; height: 65px; border-radius: 50%; background: #25D366; /* Official WhatsApp Green */
+            color: white; border: none; font-size: 2rem; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .wa-toggle:hover { transform: scale(1.1) rotate(5deg); }
+        
+        .wa-container {
+            position: absolute; bottom: 90px; right: 0; width: 340px;
+            background: #111111; border: 1px solid var(--border); border-radius: 16px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8); display: none; flex-direction: column; overflow: hidden;
+            transform-origin: bottom right; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        .wa-header { background: #25D366; padding: 20px; color: white; display: flex; align-items: center; gap: 15px; }
+        .wa-avatar { width: 45px; height: 45px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .wa-title { font-weight: 700; font-size: 1.1rem; }
+        .wa-subtitle { font-size: 0.8rem; opacity: 0.9; }
+        
+        .wa-body { padding: 20px; background: #0a0a0a; min-height: 150px; }
+        .wa-bubble { background: #1a1a1a; border: 1px solid var(--border); padding: 15px; border-radius: 0 12px 12px 12px; font-size: 0.95rem; color: #eee; line-height: 1.5; margin-bottom: 15px; }
+        
+        .wa-input-area { padding: 15px; background: #111111; border-top: 1px solid var(--border); display: flex; gap: 10px; }
+        .wa-input-area input { flex-grow: 1; background: #222; border: 1px solid #333; border-radius: 20px; padding: 12px 16px; color: white; outline: none; font-size: 0.9rem; }
+        .wa-input-area input:focus { border-color: #25D366; }
+        .wa-send { background: #25D366; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; }
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .chat-widget { bottom: 20px; right: 20px; }
-            .chat-container { width: calc(100vw - 40px); height: 400px; }
+            .hero h1 { font-size: 3rem; }
+            .wa-widget { bottom: 20px; right: 20px; }
+            .wa-container { width: calc(100vw - 40px); }
         }
     </style>
 </head>
@@ -63,75 +148,83 @@
         <a href="index.html" class="logo">Cloud<span>Learning</span></a>
         <div class="nav-links">
             <a href="syllabus.html">Curriculum</a>
-            <a href="portal.html" class="btn btn-primary" style="padding: 8px 20px;">Student Portal</a>
+            <a href="portal.html">Mentorship</a>
+            <a href="portal.html" class="btn btn-primary">Student Login</a>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="badge">Live Instructor-Led Training</div>
-        <h1>Architect the Future with <span class="text-gradient">Microsoft Azure</span></h1>
-        <p>Enterprise-grade cloud training. Skip the pre-recorded tutorials and master cloud infrastructure through live, hands-on mentorship.</p>
+    <main class="hero">
+        <div class="glow-orb"></div>
+        <div class="pill">2026 Live Architecture Batch</div>
+        
+        <h1>Deploy <span>Faster.</span><br>Scale <span>Smarter.</span></h1>
+        
+        <p>Master Microsoft Azure infrastructure through rigorous, instructor-led live training. Built for engineers who want to architect the future.</p>
         
         <div class="hero-btns">
-            <a href="syllabus.html" class="btn btn-primary" style="padding: 14px 32px; font-size: 1.1rem;">View Full Syllabus</a>
-            <a href="portal.html" class="btn" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; padding: 14px 32px; font-size: 1.1rem;">Enter Portal</a>
+            <a href="syllabus.html" class="btn btn-primary" style="padding: 16px 36px; font-size: 1rem;">View Curriculum</a>
+            <a href="portal.html" class="btn btn-outline" style="padding: 16px 36px; font-size: 1rem;">Access Portal</a>
         </div>
-    </header>
+    </main>
 
-    <div class="chat-widget">
-        <div class="chat-container" id="chatWindow">
-            <div class="chat-header">
-                <div class="chat-avatar">AI</div>
+    <div class="wa-widget">
+        <div class="wa-container" id="waWindow">
+            <div class="wa-header">
+                <div class="wa-avatar">👨‍💻</div>
                 <div>
-                    <div class="chat-title">Cloud Assistant</div>
-                    <div class="chat-status">● Online</div>
+                    <div class="wa-title">Cloud Mentor</div>
+                    <div class="wa-subtitle">Typically replies instantly</div>
                 </div>
             </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="msg msg-bot">Hello! Looking to master Azure? Ask me anything about our upcoming live batches.</div>
+            <div class="wa-body">
+                <div class="wa-bubble">
+                    Hi there! 👋<br><br>Ready to accelerate your tech career with Azure? Drop your questions here and we'll chat directly on WhatsApp.
+                </div>
             </div>
-            <div class="chat-input">
-                <input type="text" id="userInput" placeholder="Type your message..." onkeypress="handleEnter(event)">
-                <button onclick="sendMessage()">Send</button>
+            <div class="wa-input-area">
+                <input type="text" id="waInput" placeholder="Type your message..." onkeypress="handleWAEnter(event)">
+                <button class="wa-send" onclick="sendToWhatsApp()">➤</button>
             </div>
         </div>
-        <button class="chat-toggle" onclick="toggleChat()">💬</button>
+        <button class="wa-toggle" onclick="toggleWA()">
+            <svg width="35" height="35" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.01 2.014C6.5 2.014 2.02 6.49 2.02 12c0 1.76.46 3.48 1.33 5L2 22l5.12-1.34c1.47.8 3.16 1.23 4.89 1.23 5.51 0 9.99-4.48 9.99-9.99s-4.48-10-9.99-10h-.01zm4.8 14.18c-.21.58-1.18 1.1-1.63 1.16-.42.06-1.02.14-3.32-.82-2.78-1.16-4.57-4.01-4.71-4.2-.14-.19-1.13-1.5-1.13-2.86s.71-2.03.96-2.29c.25-.26.54-.33.72-.33.19 0 .37.01.53.02.18.01.42-.07.65.48.24.57.81 1.98.88 2.13.08.15.13.33.03.52-.1.19-.15.31-.3.48-.15.17-.32.37-.45.5-.15.15-.31.32-.13.63.18.31.81 1.34 1.74 2.16 1.2.1 2.31 1.41 2.63 1.57.32.16.5.13.69-.03.18-.17.78-.9 1-1.21.21-.31.42-.26.7-.16.29.1 1.83.86 2.15 1.02.31.16.52.24.6.38.07.13.07.78-.14 1.36z"/>
+            </svg>
+        </button>
     </div>
 
     <script>
-        function toggleChat() {
-            const chat = document.getElementById('chatWindow');
-            chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+        function toggleWA() {
+            const wa = document.getElementById('waWindow');
+            wa.style.display = wa.style.display === 'flex' ? 'none' : 'flex';
+            if (wa.style.display === 'flex') {
+                document.getElementById('waInput').focus();
+            }
         }
 
-        function handleEnter(e) {
-            if (e.key === 'Enter') sendMessage();
+        function handleWAEnter(e) {
+            if (e.key === 'Enter') sendToWhatsApp();
         }
 
-        function sendMessage() {
-            const input = document.getElementById('userInput');
+        function sendToWhatsApp() {
+            const input = document.getElementById('waInput');
             const msg = input.value.trim();
             if (!msg) return;
 
-            const chatBox = document.getElementById('chatMessages');
+            // --- IMPORTANT: CHANGE THIS NUMBER ---
+            // Put your actual phone number here, including country code, but NO PLUS SIGN.
+            // Example for India: 919876543210
+            const yourPhoneNumber = "1234567890"; 
             
-            // Add user message
-            const userDiv = document.createElement('div');
-            userDiv.className = 'msg msg-user';
-            userDiv.textContent = msg;
-            chatBox.appendChild(userDiv);
+            // This encodes their message and opens the WhatsApp API link
+            const waLink = `https://wa.me/${yourPhoneNumber}?text=${encodeURIComponent(msg)}`;
             
+            // Open WhatsApp in a new tab
+            window.open(waLink, '_blank');
+            
+            // Clear the input and close the widget
             input.value = '';
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            // Simulate Bot Reply after 1 second
-            setTimeout(() => {
-                const botDiv = document.createElement('div');
-                botDiv.className = 'msg msg-bot';
-                botDiv.textContent = "Thanks for reaching out! A senior mentor will review your query. In the meantime, feel free to check out the Syllabus.";
-                chatBox.appendChild(botDiv);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }, 1000);
+            toggleWA();
         }
     </script>
 </body>
