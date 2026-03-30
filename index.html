@@ -6,247 +6,133 @@
     <title>CloudLearning | Enterprise Azure Training</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-dark: #0b0f19;
-            --surface: #111827;
-            --surface-hover: #1f2937;
-            --primary: #0ea5e9; /* Light Azure Blue */
-            --accent: #8b5cf6; /* Purple for gradients */
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: rgba(255, 255, 255, 0.1);
-        }
-
+        :root { --bg-dark: #0b0f19; --surface: #111827; --primary: #0ea5e9; --text-main: #f8fafc; --text-muted: #94a3b8; --border: rgba(255, 255, 255, 0.1); }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
+        body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
         h1, h2, h3, .logo { font-family: 'Plus Jakarta Sans', sans-serif; }
-
-        /* Sleek Glass Navbar */
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1rem 5%;
-            background: rgba(11, 15, 25, 0.7);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .logo { font-size: 1.5rem; font-weight: 800; color: white; text-decoration: none; letter-spacing: -0.5px; }
+        
+        /* Navigation */
+        nav { position: fixed; top: 0; width: 100%; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: rgba(11, 15, 25, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+        .logo { font-size: 1.5rem; font-weight: 800; color: white; text-decoration: none; }
         .logo span { color: var(--primary); }
-
         .nav-links { display: flex; gap: 2rem; align-items: center; }
         .nav-links a { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
         .nav-links a:hover { color: var(--primary); }
-
-        .btn {
-            padding: 10px 24px; border-radius: 8px; font-weight: 600; text-decoration: none;
-            transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center;
-        }
-        
-        .btn-primary { background: var(--primary); color: white; border: none; }
+        .btn { padding: 10px 24px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: none; }
+        .btn-primary { background: var(--primary); color: white; }
         .btn-primary:hover { background: #0284c7; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3); }
         
-        /* Modern Gradient Hero Section */
-        .hero {
-            position: relative;
-            padding: 180px 5% 100px;
-            display: flex; flex-direction: column; align-items: center; text-align: center;
-            overflow: hidden;
-        }
-
-        /* Ambient Background Glows */
-        .hero::before {
-            content: ''; position: absolute; top: -10%; left: 20%; width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
-            border-radius: 50%; z-index: -1;
-        }
-        .hero::after {
-            content: ''; position: absolute; top: 20%; right: 10%; width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
-            border-radius: 50%; z-index: -1;
-        }
-
-        .badge {
-            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
-            padding: 6px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 500;
-            color: var(--primary); margin-bottom: 24px; backdrop-filter: blur(4px);
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; line-height: 1.1;
-            margin-bottom: 24px; max-width: 900px; letter-spacing: -1px;
-        }
-
-        /* Gradient Text Effect */
-        .text-gradient {
-            background: linear-gradient(to right, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.2rem; color: var(--text-muted); max-width: 600px;
-            margin-bottom: 40px; line-height: 1.6;
-        }
-
+        /* Hero Section */
+        .hero { position: relative; padding: 180px 5% 100px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%); border-radius: 50%; z-index: -1; }
+        .badge { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); padding: 6px 16px; border-radius: 50px; font-size: 0.85rem; color: var(--primary); margin-bottom: 24px; }
+        .hero h1 { font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 24px; max-width: 900px; }
+        .text-gradient { background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; }
         .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
 
-        /* Trust/Stats Banner */
-        .stats {
-            display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
-            padding: 40px 5%; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.02);
-        }
-        .stat-item { text-align: center; }
-        .stat-num { font-size: 2rem; font-family: 'Plus Jakarta Sans'; font-weight: 800; color: white; }
-        .stat-label { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-
-        /* Premium Course Grid */
-        .section-title { text-align: center; padding: 80px 5% 40px; }
-        .section-title h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 16px; }
-        .section-title p { color: var(--text-muted); font-size: 1.1rem; }
-
-        .container { padding: 0 5% 100px; max-width: 1200px; margin: 0 auto; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(14, 165, 233, 0.5);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            background: var(--surface-hover);
-        }
-
-        /* Top highlight bar on cards */
-        .card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            opacity: 0; transition: opacity 0.3s ease;
-        }
-        .card:hover::before { opacity: 1; }
-
-        .card-icon {
-            width: 48px; height: 48px; background: rgba(14, 165, 233, 0.1);
-            border-radius: 12px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; color: var(--primary); margin-bottom: 20px;
-        }
-
-        .card h3 { font-size: 1.4rem; margin-bottom: 12px; }
-        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px; line-height: 1.6; }
-        
-        .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 20px; }
-        .card-duration { font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
-        
-        .link-arrow { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 4px; }
-        .link-arrow:hover { text-decoration: underline; }
+        /* Chatbot Widget Styles */
+        .chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 9999; }
+        .chat-toggle { width: 60px; height: 60px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.5rem; cursor: pointer; box-shadow: 0 10px 25px rgba(14, 165, 233, 0.4); transition: transform 0.3s; display: flex; align-items: center; justify-content: center; }
+        .chat-toggle:hover { transform: scale(1.1); }
+        .chat-container { position: absolute; bottom: 80px; right: 0; width: 350px; height: 450px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); display: none; flex-direction: column; overflow: hidden; transform-origin: bottom right; animation: scaleUp 0.3s ease forwards; }
+        @keyframes scaleUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .chat-header { background: rgba(255,255,255,0.05); padding: 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+        .chat-avatar { width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .chat-title { font-weight: 600; font-size: 1rem; }
+        .chat-status { font-size: 0.8rem; color: #10b981; }
+        .chat-messages { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+        .msg { padding: 12px 16px; border-radius: 12px; max-width: 85%; font-size: 0.9rem; line-height: 1.4; }
+        .msg-bot { background: rgba(255,255,255,0.05); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .msg-user { background: var(--primary); align-self: flex-end; border-bottom-right-radius: 4px; }
+        .chat-input { padding: 16px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.2); display: flex; gap: 10px; }
+        .chat-input input { flex-grow: 1; background: transparent; border: 1px solid var(--border); border-radius: 8px; padding: 10px; color: white; outline: none; }
+        .chat-input input:focus { border-color: var(--primary); }
+        .chat-input button { background: var(--primary); color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; } /* Hide links on mobile, keep logo and CTA */
-            .hero { padding: 140px 5% 60px; }
-            .hero h1 { font-size: 2.5rem; }
-            .stats { gap: 2rem; }
+            .nav-links { display: none; }
+            .chat-widget { bottom: 20px; right: 20px; }
+            .chat-container { width: calc(100vw - 40px); height: 400px; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="logo">Cloud<span>Learning</span></a>
+        <a href="index.html" class="logo">Cloud<span>Learning</span></a>
         <div class="nav-links">
-            <a href="#curriculum">Curriculum</a>
-            <a href="#mentorship">Mentorship</a>
+            <a href="syllabus.html">Curriculum</a>
             <a href="portal.html" class="btn btn-primary" style="padding: 8px 20px;">Student Portal</a>
         </div>
     </nav>
 
     <header class="hero">
-        <div class="badge">Live Instructor-Led Training 2026</div>
+        <div class="badge">Live Instructor-Led Training</div>
         <h1>Architect the Future with <span class="text-gradient">Microsoft Azure</span></h1>
-        <p>Enterprise-grade cloud training. Skip the pre-recorded tutorials and master cloud infrastructure through live, hands-on mentorship and real-world scenarios.</p>
+        <p>Enterprise-grade cloud training. Skip the pre-recorded tutorials and master cloud infrastructure through live, hands-on mentorship.</p>
         
         <div class="hero-btns">
             <a href="syllabus.html" class="btn btn-primary" style="padding: 14px 32px; font-size: 1.1rem;">View Full Syllabus</a>
-            <a href="portal.html" class="btn" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; padding: 14px 32px; font-size: 1.1rem;">Log In</a>
+            <a href="portal.html" class="btn" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; padding: 14px 32px; font-size: 1.1rem;">Enter Portal</a>
         </div>
     </header>
 
-    <section class="stats">
-        <div class="stat-item">
-            <div class="stat-num">Live</div>
-            <div class="stat-label">1-on-1 Mentorship</div>
+    <div class="chat-widget">
+        <div class="chat-container" id="chatWindow">
+            <div class="chat-header">
+                <div class="chat-avatar">AI</div>
+                <div>
+                    <div class="chat-title">Cloud Assistant</div>
+                    <div class="chat-status">● Online</div>
+                </div>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="msg msg-bot">Hello! Looking to master Azure? Ask me anything about our upcoming live batches.</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Type your message..." onkeypress="handleEnter(event)">
+                <button onclick="sendMessage()">Send</button>
+            </div>
         </div>
-        <div class="stat-item">
-            <div class="stat-num">100%</div>
-            <div class="stat-label">Hands-on Labs</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-num">AZ-900+</div>
-            <div class="stat-label">Certification Ready</div>
-        </div>
-    </section>
+        <button class="chat-toggle" onclick="toggleChat()">💬</button>
+    </div>
 
-    <section class="section-title" id="curriculum">
-        <h2>Professional Learning Paths</h2>
-        <p>Structured curriculum designed to take you from fundamentals to expert architect.</p>
-    </section>
+    <script>
+        function toggleChat() {
+            const chat = document.getElementById('chatWindow');
+            chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+        }
 
-    <main class="container">
-        <div class="grid">
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            const chatBox = document.getElementById('chatMessages');
             
-            <div class="card">
-                <div class="card-icon">☁️</div>
-                <h3>Azure Fundamentals</h3>
-                <p>Build a rock-solid foundation. Master core cloud concepts, networking basics, and Azure infrastructure from the ground up.</p>
-                <div class="card-footer">
-                    <span class="card-duration">⏱️ 4 Weeks</span>
-                    <a href="syllabus.html" class="link-arrow">Details &rarr;</a>
-                </div>
-            </div>
+            // Add user message
+            const userDiv = document.createElement('div');
+            userDiv.className = 'msg msg-user';
+            userDiv.textContent = msg;
+            chatBox.appendChild(userDiv);
+            
+            input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
 
-            <div class="card">
-                <div class="card-icon">🔐</div>
-                <h3>Azure Administrator</h3>
-                <p>Deploy, manage, and monitor cloud environments. Learn identity management, virtual networks, and storage solutions.</p>
-                <div class="card-footer">
-                    <span class="card-duration">⏱️ 8 Weeks</span>
-                    <a href="syllabus.html" class="link-arrow">Details &rarr;</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🏛️</div>
-                <h3>Solutions Architect</h3>
-                <p>Design enterprise systems. Master high availability, disaster recovery, data integration, and secure infrastructure design.</p>
-                <div class="card-footer">
-                    <span class="card-duration">⏱️ 12 Weeks</span>
-                    <a href="syllabus.html" class="link-arrow">Details &rarr;</a>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem;">
-        &copy; 2026 CloudLearning Academy. Built for the modern cloud engineer.
-    </footer>
-
+            // Simulate Bot Reply after 1 second
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'msg msg-bot';
+                botDiv.textContent = "Thanks for reaching out! A senior mentor will review your query. In the meantime, feel free to check out the Syllabus.";
+                chatBox.appendChild(botDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
