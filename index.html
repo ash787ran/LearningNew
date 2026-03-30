@@ -84,6 +84,20 @@
         .faq-a { max-height: 0; overflow: hidden; transition: 0.3s; color: #aaa; line-height: 1.6; }
         .faq-a.open { max-height: 200px; padding-bottom: 20px; }
 
+        /* WhatsApp Widget Styles */
+        .wa-widget { position: fixed; bottom: 30px; right: 30px; z-index: 9999; }
+        .wa-toggle { width: 65px; height: 65px; border-radius: 50%; background: #25D366; color: white; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+        .wa-toggle:hover { transform: scale(1.1) rotate(5deg); }
+        .wa-container { position: absolute; bottom: 90px; right: 0; width: 340px; background: #111; border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 25px 50px rgba(0,0,0,0.8); display: none; flex-direction: column; overflow: hidden; transform-origin: bottom right; animation: popIn 0.3s forwards; }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .wa-header { background: #25D366; padding: 20px; color: white; display: flex; align-items: center; gap: 15px; }
+        .wa-avatar { width: 45px; height: 45px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .wa-body { padding: 20px; background: #0a0a0a; min-height: 120px; }
+        .wa-bubble { background: #1a1a1a; border: 1px solid var(--border); padding: 15px; border-radius: 0 12px 12px 12px; font-size: 0.95rem; color: #eee; }
+        .wa-input-area { padding: 15px; background: #111; border-top: 1px solid var(--border); display: flex; gap: 10px; }
+        .wa-input-area input { flex-grow: 1; background: #222; border: 1px solid #333; border-radius: 20px; padding: 12px 16px; color: white; outline: none; }
+        .wa-send { background: #25D366; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-weight: bold; }
+
         /* Footer */
         footer { border-top: 1px solid var(--border); padding: 40px 5%; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
 
@@ -217,6 +231,25 @@
         </footer>
     </div>
 
+    <div class="content-layer wa-widget">
+        <div class="wa-container" id="waWindow">
+            <div class="wa-header">
+                <div class="wa-avatar">👨‍💻</div>
+                <div><div style="font-weight: 700;">Cloud Mentor</div><div style="font-size: 0.8rem;">Typically replies instantly</div></div>
+            </div>
+            <div class="wa-body">
+                <div class="wa-bubble">Hi there! 👋<br><br>Ready to accelerate your tech career with Azure? Drop your questions here.</div>
+            </div>
+            <div class="wa-input-area">
+                <input type="text" id="waInput" placeholder="Type a message..." onkeypress="if(event.key === 'Enter') sendWA()">
+                <button class="wa-send" onclick="sendWA()">➤</button>
+            </div>
+        </div>
+        <button class="wa-toggle" onclick="document.getElementById('waWindow').style.display = document.getElementById('waWindow').style.display === 'flex' ? 'none' : 'flex';">
+            <svg width="35" height="35" viewBox="0 0 24 24" fill="white"><path d="M12.01 2.014C6.5 2.014 2.02 6.49 2.02 12c0 1.76.46 3.48 1.33 5L2 22l5.12-1.34c1.47.8 3.16 1.23 4.89 1.23 5.51 0 9.99-4.48 9.99-9.99s-4.48-10-9.99-10h-.01zm4.8 14.18c-.21.58-1.18 1.1-1.63 1.16-.42.06-1.02.14-3.32-.82-2.78-1.16-4.57-4.01-4.71-4.2-.14-.19-1.13-1.5-1.13-2.86s.71-2.03.96-2.29c.25-.26.54-.33.72-.33.19 0 .37.01.53.02.18.01.42-.07.65.48.24.57.81 1.98.88 2.13.08.15.13.33.03.52-.1.19-.15.31-.48-.15.17-.32.37-.45.5-.15.15-.31.32-.13.63.18.31.81 1.34 1.74 2.16 1.2.1 2.31 1.41 2.63 1.57.32.16.5.13.69-.03.18-.17.78-.9 1-1.21.21-.31.42-.26.7-.16.29.1 1.83.86 2.15 1.02.31.16.52.24.6.38.07.13.07.78-.14 1.36z"/></svg>
+        </button>
+    </div>
+
     <script>
         // Interactive Canvas
         const canvas = document.getElementById('networkCanvas');
@@ -280,28 +313,31 @@
             }
         }
 
+        // WhatsApp Integration
+        function sendWA() {
+            const msg = document.getElementById('waInput').value.trim();
+            if (!msg) return;
+            const phone = "+14372999816"; // <-- CHANGE THIS TO YOUR NUMBER
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+            document.getElementById('waInput').value = '';
+        }
+
         // Razorpay Integration Mockup
         document.getElementById('rzp-button1').onclick = function(e){
             e.preventDefault();
-            // INSTRUCTIONS FOR RAZORPAY:
-            // When you create a Razorpay account, they will give you a "Key ID".
-            // You will replace the alert below with the official Razorpay checkout function.
-            alert("This button is successfully wired to trigger the Razorpay popup!\n\nTo make it process real money, you will replace this alert in the code with your actual Razorpay 'options' object containing your LIVE API Key.");
+            alert("Razorpay successfully triggered! Replace this alert with your LIVE API Key to collect payments.");
             
-            /* OFFICIAL RAZORPAY CODE TEMPLATE (Uncomment and add your key later)
+            /* OFFICIAL RAZORPAY CODE
             var options = {
-                "key": "YOUR_KEY_ID", // Enter the Key ID generated from the Dashboard
-                "amount": "500000", // Amount is in currency subunits. 500000 = ₹5,000.00
+                "key": "YOUR_KEY_ID", 
+                "amount": "500000", // ₹5,000.00
                 "currency": "INR",
                 "name": "CloudLearning Academy",
                 "description": "Enterprise Masterclass",
-                "image": "https://example.com/your_logo",
                 "handler": function (response){
-                    alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
-                    // Redirect to portal.html here
+                    alert("Payment Successful! ID: " + response.razorpay_payment_id);
                     window.location.href = "portal.html";
                 },
-                "prefill": { "name": "", "email": "", "contact": "" },
                 "theme": { "color": "#0078D4" }
             };
             var rzp1 = new Razorpay(options);
