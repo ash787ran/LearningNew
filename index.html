@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudLearning | Interactive Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --azure-blue: #0078d4; --azure-dark: #005a9e; --bg-deep: #050b14; --text-main: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-deep); color: var(--text-main); overflow: hidden; }
+        #networkCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .content-wrapper { position: relative; z-index: 10; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; background: radial-gradient(circle at center, rgba(5, 11, 20, 0.4) 0%, rgba(5, 11, 20, 0.9) 100%); }
+        .badge { background: rgba(0, 120, 212, 0.2); color: #60a5fa; padding: 8px 16px; border-radius: 50px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(0, 120, 212, 0.4); margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
+        h1 { font-size: clamp(3rem, 8vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
+        h1 span { color: var(--azure-blue); text-shadow: 0 0 20px rgba(0, 120, 212, 0.5); }
+        p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin-bottom: 40px; }
+        .btn-group { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .btn { padding: 16px 32px; border-radius: 8px; font-size: 1.1rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .btn-primary { background: var(--azure-blue); color: white; box-shadow: 0 10px 20px -5px rgba(0, 120, 212, 0.5); }
+        .btn-primary:hover { background: var(--azure-dark); transform: translateY(-3px); }
+        .btn-outline { background: rgba(255, 255, 255, 0.05); color: white; border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px); }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-3px); }
+        @media (max-width: 768px) { .btn-group { flex-direction: column; width: 100%; max-width: 300px; } .btn { width: 100%; } }
+    </style>
+</head>
+<body>
+    <canvas id="networkCanvas"></canvas>
+    <div class="content-wrapper">
+        <div class="badge">Live Architecture Simulation</div>
+        <h1>Master <span>Azure</span> Cloud</h1>
+        <p>Experience the most dynamic, hands-on infrastructure training available.</p>
+        <div class="btn-group">
+            <a href="portal.html" class="btn btn-primary">Enter the Academy</a>
+            <a href="syllabus.html" class="btn btn-outline">Explore Syllabus</a>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('networkCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let particlesArray = [];
+        let mouse = { x: null, y: null, radius: 150 }
+        window.addEventListener('mousemove', function(event) { mouse.x = event.x; mouse.y = event.y; });
+        window.addEventListener('mouseout', function() { mouse.x = undefined; mouse.y = undefined; });
+        window.addEventListener('resize', function() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color; this.baseX = this.x; this.baseY = this.y; this.density = (Math.random() * 30) + 1;
+            }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = this.color; ctx.fill(); }
+            update() {
+                let dx = mouse.x - this.x; let dy = mouse.y - this.y; let distance = Math.sqrt(dx * dx + dy * dy);
+                let forceDirectionX = dx / distance; let forceDirectionY = dy / distance;
+                let force = (mouse.radius - distance) / mouse.radius;
+                let directionX = forceDirectionX * force * this.density; let directionY = forceDirectionY * force * this.density;
+                if (distance < mouse.radius) { this.x -= directionX; this.y -= directionY; } 
+                else { if (this.x !== this.baseX) { this.x -= (this.x - this.baseX) / 10; } if (this.y !== this.baseY) { this.y -= (this.y - this.baseY) / 10; } }
+                this.baseX += this.directionX; this.baseY += this.directionY;
+                if (this.baseX < 0 || this.baseX > canvas.width) this.directionX = -this.directionX;
+                if (this.baseY < 0 || this.baseY > canvas.height) this.directionY = -this.directionY;
+                this.draw();
+            }
+        }
+        function init() {
+            particlesArray = []; let numberOfParticles = (canvas.height * canvas.width) / 15000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                particlesArray.push(new Particle(x, y, (Math.random() * 1) - 0.5, (Math.random() * 1) - 0.5, size, '#0078d4'));
+            }
+        }
+        function connect() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                        ctx.strokeStyle = 'rgba(0, 120, 212,' + (1 - (distance / 20000)) + ')'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke();
+                    }
+                }
+            }
+        }
+        function animate() { requestAnimationFrame(animate); ctx.clearRect(0, 0, innerWidth, innerHeight); for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); } connect(); }
+        init(); animate();
+    </script>
+</body>
+</html>
